@@ -15,7 +15,7 @@ class UrlsController < ApplicationController
     @url = Url.find_or_initialize_by(original_url: short_url_params[:original_url])
 
     if @url.save
-      render json: @url, status: :created, location: @url
+      render json: @url.to_json(only: [:short_url]), status: :created, location: @url
     else
       render json: @url.errors, status: :unprocessable_entity
     end
